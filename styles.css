@@ -1,0 +1,63 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  color: #222;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+header h1 {
+  margin: 0 0 8px 0;
+}
+
+.question-block {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.question {
+  margin-bottom: 12px;
+}
+
+.answers {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 0 0;
+}
+
+.answers li {
+  padding: 8px 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.answers li:hover {
+  background: #f5f7fb;
+}
+
+.answers li.selected {
+  border-color: #3f8ae0;
+  background: #e6f2ff;
+}
+
+button {
+  background: #3f8ae0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+
+button:hover {
+  background: #2f79cc;
+}
