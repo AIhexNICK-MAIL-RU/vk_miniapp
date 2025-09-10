@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест на поиск хобби</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Найди своё идеальное хобби</h1>
+            <p>Ответьте на вопросы и узнайте, какое хобби подходит именно вам</p>
+        </header>
+        
+        <main>
+            <div class="question-block">
+                <div class="question">
+                    <h3>1. Что вас вдохновляет?</h3>
+                    <ul class="answers">
+                        <li>Природа и путешествия</li>
+                        <li>Искусство и творчество</li>
+                        <li>Наука и технологии</li>
+                        <li>Спорт и активность</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>2. Как вы отдыхаете?</h3>
+                    <ul class="answers">
+                        <li>В одиночестве с книгой</li>
+                        <li>В компании друзей</li>
+                        <li>На природе</li>
+                        <li>За творческим занятием</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>3. Что вас раздражает?</h3>
+                    <ul class="answers">
+                        <li>Монотонная работа</li>
+                        <li>Отсутствие движения</li>
+                        <li>Шум и суета</li>
+                        <li>Одиночество</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>4. Какие навыки вы хотели бы развить?</h3>
+                    <ul class="answers">
+                        <li>Творческие способности</li>
+                        <li>Физические возможности</li>
+                        <li>Интеллектуальные навыки</li>
+                        <li>Социальные умения</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>5. Что приносит вам радость?</h3>
+                    <ul class="answers">
+                        <li>Создание чего-то нового</li>
+                        <li>Помощь другим</li>
+                        <li>Достижение целей</li>
+                        <li>Новые впечатления</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>6. Какой формат занятий вам подходит?</h3>
+                    <ul class="answers">
+                        <li>Индивидуальные занятия</li>
+                        <li>Групповые занятия</li>
+                        <li>Онлайн-обучение</li>
+                        <li>Офлайн-мероприятия</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>7. Сколько времени вы готовы уделять хобби?</h3>
+                    <ul class="answers">
+                        <li>1-2 часа в неделю</li>
+                        <li>3-4 часа в неделю</li>
+                        <li>Ежедневно</li>
+                        <li>По выходным</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>8. Какие темы вам интересны?</h3>
+                    <ul class="answers">
+                        <li>Искусство и дизайн</li>
+                        <li>Спорт и здоровье</li>
+                        <li>Наука и технологии</li>
+                        <li>Природа и экология</li>
+                    </ul>
+                </div>
+
+                <div class="question">
+                    <h3>9. Что для вас важно в хобби?</h3>
+                    <ul class="answers">
+                        <li>Развитие навыков</li>
+                        <li>Общение с людьми</li>
+                        <li>Творческая реализация</li>
+                        <li>Физическая активность</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+                <button id="finishBtn" style="padding: 10px 16px; font-size: 16px; cursor: pointer;">Закончить опрос</button>
+            </div>
+        </main>
+
+        <script>
+            (function() {
+                function setupSelectableAnswers() {
+                    var questionBlocks = document.querySelectorAll('.question');
+                    questionBlocks.forEach(function(block) {
+                        var items = block.querySelectorAll('.answers li');
+                        items.forEach(function(item) {
+                            item.style.cursor = 'pointer';
+                            item.addEventListener('click', function() {
+                                items.forEach(function(sibling) { sibling.classList.remove('selected'); });
+                                item.classList.add('selected');
+                            });
+                        });
+                    });
+                }
+
+                function collectResults() {
+                    var results = [];
+                    var questionBlocks = document.querySelectorAll('.question');
+                    questionBlocks.forEach(function(block, index) {
+                        var questionTextEl = block.querySelector('h3');
+                        var selected = block.querySelector('.answers li.selected');
+                        results.push({
+                            questionNumber: index + 1,
+                            question: questionTextEl ? questionTextEl.textContent.trim() : ('Вопрос ' + (index + 1)),
+                            answer: selected ? selected.textContent.trim() : null
+                        });
+                    });
+                    return results;
+                }
+
+                function onFinish() {
+                    var results = collectResults();
+                    try {
+                        localStorage.setItem('surveyResults', JSON.stringify(results));
+                    } catch (e) {
+                        console.error('Failed to save results', e);
+                    }
+                    window.location.href = 'results.html';
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    setupSelectableAnswers();
+                    var btn = document.getElementById('finishBtn');
+                    if (btn) {
+                        btn.addEventListener('click', onFinish);
+                    }
+                });
+            })();
+        </script>
+    </div>
+</body>
+</html>
